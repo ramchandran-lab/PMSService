@@ -1,0 +1,676 @@
+Business Use Case 1: Outpatient ClinicManagement System
+
+Business Context
+
+Dr. Sharma runs a multi-specialty outpatient clinic with 5 doctors (General Physician, Pediatrician,
+Gynecologist, Orthopedic, Dermatologist) in a growing urban area. Currently, the clinic uses a paper-
+based system with a receptionist manually managing appointments in a register, doctors writingprescriptions by hand, and billing done through a basic calculator and receipt book.
+
+This manual process leads to double-bookings, long patient wait times, lost medical records, difficultyin tracking patient history, and challenges in generating financial reports for business planning.
+
+The clinic needs a digital practice management system to streamline patient registration, appointmentscheduling, consultation workflow, prescription management, and billing operations.
+
+Business Objectives
+
+Reduce patient wait time by 40% through better appointment scheduling
+Eliminate double-bookings and scheduling conflicts
+Maintain digital medical records for all patients
+Enable doctors to access patient history during consultations
+Automate billing and generate financial reports
+Improve patient satisfaction through better communication
+Track doctor performance and clinic revenue
+
+
+Target Users
+
+Receptionist/Front Desk - Patient registration, appointment booking, billing
+Doctor - View appointments, patient history, write prescriptions, consultation notes
+Patient - Book appointments, view medical history, download prescriptions
+Clinic Admin - User management, clinic configuration, reports and analytics
+
+
+
+Core Functional Requirements
+
+1. Patient Management
+
+Patient registration with demographics (Name, Age, Gender, Contact, Address, Blood Group)
+Unique patient ID generation (e.g., PAT001, PAT002)
+Search patients by name, phone number, or patient ID
+View complete patient profile with visit history
+Update patient information
+Track patient allergies and chronic conditions
+
+
+2. Doctor Management
+
+Doctor profiles with specialization, qualification, consultation fee
+Weekly schedule configuration (working days and time slots)
+Availability management (mark leaves/unavailable dates)
+Consultation duration setting (default 15-30 mins per patient)
+View doctor's daily appointment list
+Track consultation statistics
+
+
+3. Appointment Scheduling
+
+Book appointments by selecting doctor, date, and available time slot
+Display doctor availability in real-time
+Prevent double-booking (one patient per slot)
+Appointment types: New Visit, Follow-up
+Appointment status: Scheduled, Checked-In, Completed, Cancelled, No-Show
+Walk-in patient registration and immediate slot allocation
+Send appointment confirmation (email/SMS simulation)
+Reschedule or cancel appointments
+View daily appointment calendar for all doctors
+
+
+4. Queue Management
+
+Patient check-in process at reception
+Real-time queue display showing current patient with doctor
+Estimated wait time calculation
+Call next patient functionality
+Queue status visible on display screen (bonus feature)
+
+
+
+5. Consultation & Medical Records
+
+Doctor dashboard showing today's appointments
+Patient medical history view during consultation
+Record consultation notes (chief complaint, diagnosis, observations)
+Prescription creation:
+Medicine name, dosage, frequency, duration
+Special instructions
+Add multiple medicines
+
+
+
+Generate prescription PDF with clinic header
+Save consultation records linked to appointment
+View previous prescriptions and consultation history
+
+
+6. Billing & Payments
+
+Generate bill after consultation
+Bill items:
+Consultation fee (doctor-specific)
+Additional procedures/tests (if any)
+Medicine charges (if clinic has pharmacy)
+
+
+
+Payment modes: Cash, Card, UPI
+Generate receipt with bill number
+Track payment status (Paid/Pending/Partially Paid)
+Daily collection report
+Doctor-wise revenue report
+
+
+7. Reports & Analytics
+
+Daily appointment summary (total, completed, cancelled, no-show)
+Revenue reports (daily, weekly, monthly)
+Doctor-wise consultation statistics
+Patient visit trends
+Popular time slots analysis
+Export reports to PDF/CSV
+
+
+8. Notifications & Reminders
+
+Appointment confirmation message
+Reminder 1 day before appointment
+Prescription ready notification
+Payment receipt via email/SMS (simulated)
+
+
+
+9. User Management & Access Control
+
+Role-based login (Admin, Receptionist, Doctor, Patient)
+User authentication and password management
+Activity audit logs
+Session management
+
+
+Technical Requirements
+
+Backend (Python)
+
+Framework: Flask or FastAPI
+Database: SQLite with proper schema design
+API Design: RESTful APIs with clear endpoint structure
+Authentication: JWT-based authentication with role-based access
+Validation: Input validation using Pydantic or similar
+PDF Generation: ReportLab or WeasyPrint for prescriptions and bills
+Date/Time Handling: Proper timezone support for appointments
+Business Logic: Service layer for appointment slot management
+Documentation: OpenAPI/Swagger documentation
+
+
+Frontend Web (React)
+
+Framework: React 18+ with functional components
+State Management: Context API or Redux Toolkit
+Routing: React Router with role-based protected routes
+UI Library: Material-UI, Ant Design, or Chakra UI
+Forms: React Hook Form with Yup validation
+Date/Time Picker: For appointment scheduling
+Calendar View: For appointment visualization
+Tables: Data grids for patient lists, appointment lists
+PDF Viewer: Display prescriptions and bills
+Notifications: Toast notifications for user feedback
+Responsive Design: Mobile-friendly for tablet use at reception
+
+
+Mobile App (React Native)
+
+Framework: React Native with Expo
+Navigation: React Navigation
+UI Components: React Native Paper or Native Base
+Key Features for Patients:
+
+
+
+View doctor list with specializations
+Check doctor availability
+Book/reschedule/cancel appointments
+View upcoming and past appointments
+Access prescription history
+Download prescription PDFs
+View medical records
+Profile management
+Push notifications for reminders
+
+
+
+
+
+DevOps & Deployment
+
+Containerization: Docker multi-container setup
+Backend API container
+Frontend web container
+Shared volume for generated PDFs
+Database volume for persistence
+
+
+
+Docker Compose: Service orchestration
+Environment Configuration: .env files
+Logging: Application logs for debugging
+
+
+Minimum Viable Product (MVP) Scope
+
+Must Have Features (Priority 1)
+
+Patient registration and search
+Doctor profiles with basic schedule
+Appointment booking with slot-based scheduling
+Prevent double-booking logic
+Patient check-in functionality
+Basic consultation notes
+Simple prescription creation (text-based)
+Billing with consultation fee
+Payment recording
+User authentication (Admin, Receptionist, Doctor roles)
+Daily appointment list view
+Patient appointment history
+
+
+Should Have Features (Priority 2)
+
+Doctor availability/leave management
+
+
+
+Appointment cancellation and rescheduling
+Complete patient medical history view
+Prescription PDF generation
+Bill/receipt PDF generation
+Queue management system
+Payment receipt generation
+Basic reports (daily appointments, revenue)
+Patient profile with allergies and conditions
+Mobile app for patients with appointment booking
+
+
+Could Have Features (Bonus)
+
+Email/SMS notifications (simulated or integrated)
+Advanced analytics dashboard with charts
+Export reports to CSV/PDF
+Multi-medicine prescription builder
+Treatment plan tracking
+Follow-up appointment suggestion
+Insurance details management
+Receptionist performance tracking
+WhatsApp integration for reminders
+
+
+Database Schema (Suggested)
+
+Core Tables
+
+users - All system users with roles
+patients - Patient demographics and medical info
+doctors - Doctor profiles, specialization, fees
+doctor_schedules - Weekly working hours and time slots
+doctor_leaves - Leave/unavailability dates
+appointments - Appointment bookings
+consultations - Consultation notes and diagnosis
+prescriptions - Prescription details
+prescription_medicines - Individual medicines in prescription
+bills - Billing information
+payments - Payment transactions
+audit_logs - System activity tracking
+
+
+
+Key Relationships
+
+Patient → Appointments (1:Many)
+Doctor → Appointments (1:Many)
+Appointment → Consultation (1:1)
+Consultation → Prescription (1:1)
+Prescription → Medicines (1:Many)
+Appointment → Bill (1:1)
+Bill → Payments (1:Many for partial payments)
+
+
+Deliverables
+
+Code & Documentation
+
+Backend API
+
+Clean Python codebase with service layer
+Database schema with sample data
+RESTful API endpoints
+Appointment slot calculation logic
+PDF generation for prescriptions/bills
+Unit tests for critical logic
+README with setup instructions
+
+
+
+Frontend Web Application
+
+React SPA with role-based dashboards
+Appointment booking interface with calendar
+Doctor and patient management
+Consultation and prescription forms
+Billing module
+Reports section
+README with setup guide
+
+
+
+Mobile Application
+
+React Native app for patients
+Doctor listing and availability
+Appointment booking flow
+Medical records access
+Prescription viewer
+README with build instructions
+
+
+
+Deployment
+
+Dockerfiles for each component
+docker-compose.yml
+
+
+
+
+
+
+Volume configuration
+Deployment guide
+
+
+
+Documentation
+
+System architecture diagram
+Database ER diagram
+API documentation
+User workflows
+Setup and deployment guide
+Sample test credentials
+
+
+
+
+
+Evaluation Criteria
+
+CriteriaWeightDescriptionArchitectureDesign20%
+Proper layering, API design, database normalization,
+scalabilityCode Quality25%
+Code organization, naming, error handling, security,
+reusabilityFunctionality25%Core features working correctly, business logic, data integrityUI/UX Design15%
+Intuitive interface, responsive design, user workflows,
+accessibilityDeployment10%Docker setup, ease of deployment, configurationDocumentation5%Setup instructions, architecture diagrams, API docs
+
+Sample User Workflows
+
+Workflow 1: New Patient Appointment Booking
+
+Patient walks into clinic
+Receptionist opens "New Patient Registration"
+Enters patient details (name, age, contact, address)
+System generates Patient ID (PAT001)
+Receptionist selects "Book Appointment"
+Selects doctor (Dr. Kumar - Orthopedic) and date (Tomorrow)
+System shows available slots (10:00 AM, 10:30 AM, 11:00 AM...)
+Selects 10:30 AM slot
+Appointment confirmed with appointment ID
+System sends confirmation message (simulated)
+
+
+
+Receptionist gives token/appointment slip to patient
+
+
+Workflow 2: Patient Consultation Process
+
+Patient arrives at clinic next day at 10:20 AM
+Receptionist checks patient in (marks status as "Checked-In")
+Patient added to doctor's queue
+Doctor sees patient name in queue on their dashboard
+Doctor clicks "Start Consultation" when ready
+Views patient's previous visit history (if any)
+Records chief complaint: "Knee pain for 2 weeks"
+Performs examination and records diagnosis: "Osteoarthritis"
+Creates prescription:
+Medicine 1: Ibuprofen 400mg, 1-0-1, After food, 7 days
+Medicine 2: Calcium tablets, 1-0-0, After food, 30 days
+
+
+
+Adds special instructions: "Apply hot compress twice daily"
+Saves consultation and generates prescription PDF
+Marks appointment as "Completed"
+System creates bill (Consultation Fee: ₹500)
+Patient goes to reception for payment
+Receptionist collects payment and generates receipt
+
+
+Workflow 3: Follow-up Appointment (via Mobile App)
+
+Patient opens mobile app 1 week later
+Logs in with phone number/patient ID
+Views previous appointments and prescriptions
+Selects "Book Follow-up Appointment"
+Chooses same doctor (Dr. Kumar)
+Views available slots for next week
+Books slot for 3:00 PM next Wednesday
+Receives appointment confirmation notification
+Gets reminder notification 1 day before appointment
+Arrives at clinic, checks in at reception
+Doctor reviews previous consultation notes automatically
+Continues treatment as needed
+
+
+Workflow 4: Daily Clinic Operations (Admin View)
+
+Admin logs in to dashboard at end of day
+Views daily summary:
+
+
+
+Total appointments: 45
+Completed: 40
+Cancelled: 3
+No-shows: 2
+
+
+
+Checks revenue report:
+Total collection: ₹22,500
+Cash: ₹15,000
+Card/UPI: ₹7,500
+
+
+
+Views doctor-wise statistics:
+Dr. Kumar (Ortho): 12 patients, ₹6,000
+Dr. Mehta (Pediatrics): 15 patients, ₹7,500
+
+
+
+Exports report to PDF for accounting
+Reviews patient feedback (if collected)
+Plans next day's schedule
+
+
+Technical Challenges to Address
+
+Appointment Slot Management
+
+Calculate available slots based on doctor schedule and duration
+Handle overlapping appointments and breaks
+Manage walk-ins without disrupting scheduled patients
+
+
+
+Concurrent Booking Prevention
+
+Ensure two receptionists can't book same slot simultaneously
+Implement optimistic locking or database constraints
+
+
+
+Date/Time Handling
+
+Properly handle timezones
+Calculate appointment end time based on duration
+Manage doctor schedules across weeks
+
+
+
+Queue Management
+
+Real-time queue updates when patient checked in
+Handle delays and adjust estimated wait times
+
+
+
+PDF Generation
+
+Format prescriptions professionally with clinic branding
+Include all required medical information
+Ensure PDFs are downloadable and printable
+
+
+
+Role-Based Access
+
+Different dashboards for different roles
+Prevent unauthorized access to patient data
+Audit sensitive operations
+
+
+
+Mobile-Web Sync
+
+
+
+
+
+Ensure appointments booked on mobile reflect on web instantly
+Handle offline scenarios gracefully
+
+
+
+
+
+Business Logic - Key Calculations
+
+Available Slot Generation
+
+Doctor Schedule: Monday-Friday, 9:00 AM - 5:00 PMLunch Break: 1:00 PM - 2:00 PMConsultation Duration: 30 minutesAvailable Slots:
+9:00 AM, 9:30 AM, 10:00 AM, 10:30 AM, 11:00 AM, 
+11:30 AM, 12:00 PM, 12:30 PM[Lunch Break]
+2:00 PM, 2:30 PM, 3:00 PM, 3:30 PM, 4:00 PM, 4:30 PMFilter out:
+- Already booked slots- Past time slots for today- Doctor leave dates
+Estimated Wait Time
+
+Current Time: 10:15 AMPatients in Queue: 3 patients before youAverage Consultation: 30 minutesCurrent Patient Started: 10:00 AMCalculation:
+- Current patient remaining time: ~15 mins- Queue patients: 3 × 30 = 90 mins- Total wait time: 15 + 90 = 105 minutes ≈ 1 hour 45 mins- Your estimated time: 12:00 PM
+Daily Revenue Calculation
+
+Doctor 1: 15 patients × ₹500 = ₹7,500Doctor 2: 12 patients × ₹600 = ₹7,200Doctor 3: 8 patients × ₹700 = ₹5,600Additional Procedures: ₹2,200Total Revenue: ₹22,500Payment Mode Breakdown:
+Cash: ₹15,000 (67%)
+Card: ₹4,500 (20%)
+UPI: ₹3,000 (13%)
+Security & Compliance Considerations
+
+Patient Data Privacy
+
+Encrypt sensitive medical information
+Implement proper access controls
+Audit logs for who accessed patient records
+
+
+
+Authentication Security
+
+Strong password policies
+Secure password hashing (bcrypt)
+Session timeout for inactive users
+
+
+
+Data Validation
+
+Validate all inputs (phone numbers, dates, medical data)
+Prevent SQL injection through ORM
+Sanitize user inputs
+
+
+
+Medical Record Integrity
+
+Prescriptions and consultations should be append-only
+Track all modifications with timestamp and user
+Prevent unauthorized deletion of records
+
+
+
+
+
+Optional Enhancements (If Time Permits)
+
+SMS/Email integration for real-time notifications
+Video consultation support (telemedicine)
+Lab test integration and report management
+Medicine inventory management (if clinic has pharmacy)
+Insurance claim generation
+
+
+
+Patient feedback and ratings
+Multi-clinic support for chain clinics
+Referral doctor management
+Appointment waiting list for fully booked slots
+Automatic follow-up scheduling based on prescription duration
+
+
+Development Timeline Suggestion (2 Weeks)
+
+Week 1
+
+Days 1-2: Database design, backend setup, authentication
+Days 3-4: Patient & doctor management, appointment booking logic
+Days 5-7: Web frontend - registration, scheduling, dashboards
+
+
+Week 2
+
+Days 8-9: Consultation module, prescription & billing
+Days 10-11: Mobile app development, PDF generation
+Days 12-13: Queue management, reports, Docker setup
+Day 14: Testing, bug fixes, documentation
+
+
+Success Metrics
+
+A successful implementation should demonstrate:
+
+Complete patient journey from registration to prescription
+Accurate appointment scheduling without conflicts
+Clean separation of concerns in code
+Responsive web interface for clinic staff
+Functional mobile app for patients
+PDF generation for prescriptions and bills
+Role-based access working correctly
+One-command Docker deployment
+Comprehensive documentation
+No critical bugs in appointment booking logic
+
+
+Sample Test Scenarios
+
+Double Booking Prevention
+
+Two receptionists try to book same slot simultaneously
+
+
+
+
+
+
+System should prevent and show error to second user
+
+
+
+Doctor Schedule Validation
+
+Try booking appointment on doctor's leave date
+System should show "Doctor not available"
+
+
+
+Queue Management
+
+Check-in 5 patients for same doctor
+Verify queue order and estimated wait time
+
+
+
+Prescription History
+
+Create multiple consultations for same patient
+Doctor should see complete history during new visit
+
+
+
+Payment Recording
+
+Record partial payment for bill
+Verify outstanding amount calculation
+Complete payment and verify receipt generation
+
+
+
+Mobile App Booking
+
+Patient books appointment via mobile app
+Verify it appears in receptionist's web dashboard immediately
+
+
+
+
+
+Note to Students: This is a realistic clinic management scenario. Focus on building smoothworkflows for the core features (registration, appointment booking, consultation, billing). Ensureappointment slot calculation is accurate as this is critical for the business. Prioritize user experience -
+clinic staff will use this system hundreds of times daily, so make it efficient and intuitive.
+
+
