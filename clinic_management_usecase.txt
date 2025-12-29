@@ -1,14 +1,14 @@
-Business Use Case 1: Outpatient ClinicManagement System
+Business Use Case 1: Outpatient Clinic Management System
 
 Business Context
 
 Dr. Sharma runs a multi-specialty outpatient clinic with 5 doctors (General Physician, Pediatrician,
 Gynecologist, Orthopedic, Dermatologist) in a growing urban area. Currently, the clinic uses a paper-
-based system with a receptionist manually managing appointments in a register, doctors writingprescriptions by hand, and billing done through a basic calculator and receipt book.
+based system with a receptionist manually managing appointments in a register, doctors writing prescriptions by hand, and billing done through a basic calculator and receipt book.
 
-This manual process leads to double-bookings, long patient wait times, lost medical records, difficultyin tracking patient history, and challenges in generating financial reports for business planning.
+This manual process leads to double-bookings, long patient wait times, lost medical records, difficulty in tracking patient history, and challenges in generating financial reports for business planning.
 
-The clinic needs a digital practice management system to streamline patient registration, appointmentscheduling, consultation workflow, prescription management, and billing operations.
+The clinic needs a digital practice management system to streamline patient registration, appointment scheduling, consultation workflow, prescription management, and billing operations.
 
 Business Objectives
 
@@ -670,7 +670,7 @@ Verify it appears in receptionist's web dashboard immediately
 
 
 
-Note to Students: This is a realistic clinic management scenario. Focus on building smoothworkflows for the core features (registration, appointment booking, consultation, billing). Ensureappointment slot calculation is accurate as this is critical for the business. Prioritize user experience -
+Note to Students: This is a realistic clinic management scenario. Focus on building smooth workflows for the core features (registration, appointment booking, consultation, billing). Ensure appointment slot calculation is accurate as this is critical for the business. Prioritize user experience -
 clinic staff will use this system hundreds of times daily, so make it efficient and intuitive.
 
 
